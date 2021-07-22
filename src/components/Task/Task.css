@@ -1,0 +1,14 @@
+.task {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid grey;
+    padding: 10px;
+}
+
+.task-text {
+    margin: 0;
+}
+
+.task .delete-btn {
+    color: red;
+}

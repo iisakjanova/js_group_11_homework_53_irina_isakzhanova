@@ -1,0 +1,13 @@
+.add-task-form {
+    margin-bottom: 10px;
+    display: flex;
+    width: 100%;
+}
+
+.add-task-input {
+    flex-grow: 1;
+}
+
+.add-btn {
+    margin-left: 10px;
+}
