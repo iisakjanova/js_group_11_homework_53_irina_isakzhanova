@@ -12,6 +12,16 @@ const App = () => {
         {text: 'Do homework', id: nanoid(),},
     ]);
 
+    const [currentTask, setCurrentTask] = useState({});
+
+    const handleInputText = text => {
+        setCurrentTask({text, id: nanoid(),});
+    };
+
+    const addTask = currentTask => {
+        setTasks([...tasks, currentTask]);
+    };
+
     const tasksComponents = tasks.map(task => (
         <Task
             key={task.id}
@@ -21,7 +31,10 @@ const App = () => {
 
     return (
         <div className="App">
-            <AddTaskForm />
+            <AddTaskForm
+                onInputChange={e => handleInputText(e.target.value)}
+                onClick={() => addTask(currentTask)}
+            />
             {tasksComponents}
         </div>
     );
