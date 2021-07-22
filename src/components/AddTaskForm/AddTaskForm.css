@@ -6,6 +6,7 @@
 
 .add-task-input {
     flex-grow: 1;
+    padding: 10px;
 }
 
 .add-btn {
