@@ -22,10 +22,15 @@ const App = () => {
         setTasks([...tasks, currentTask]);
     };
 
+    const removeTask = id => {
+        setTasks(tasks.filter(task => task.id !== id));
+    }
+
     const tasksComponents = tasks.map(task => (
         <Task
             key={task.id}
             text={task.text}
+            onRemove={() => removeTask(task.id)}
         />
     ));
 
@@ -33,7 +38,7 @@ const App = () => {
         <div className="App">
             <AddTaskForm
                 onInputChange={e => handleInputText(e.target.value)}
-                onClick={() => addTask(currentTask)}
+                onAdd={() => addTask(currentTask)}
             />
             {tasksComponents}
         </div>

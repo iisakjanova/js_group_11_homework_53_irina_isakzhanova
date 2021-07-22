@@ -11,7 +11,7 @@ const AddTaskForm = props => {
             />
             <button
                 className="add-btn"
-                onClick={props.onClick}
+                onClick={props.onAdd}
             >
                 Add
             </button>

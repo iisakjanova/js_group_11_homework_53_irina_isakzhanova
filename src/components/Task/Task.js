@@ -4,7 +4,7 @@ const Task = props => {
     return (
         <div className="task">
             <p className="task-text">{props.text}</p>
-            <button className="delete-btn">X</button>
+            <button className="delete-btn" onClick={props.onRemove}>X</button>
         </div>
     )
 };
