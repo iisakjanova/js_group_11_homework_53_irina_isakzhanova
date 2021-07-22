@@ -7,40 +7,62 @@ import Task from "./components/Task/Task";
 
 const App = () => {
     const [tasks, setTasks] = useState([
-        {text: 'Buy milk', id: nanoid(),},
-        {text: 'Walk with dog', id: nanoid(),},
-        {text: 'Do homework', id: nanoid(),},
+        {text: 'Buy milk', id: nanoid(), done: false,},
+        {text: 'Walk with dog', id: nanoid(), done: false,},
+        {text: 'Do homework', id: nanoid(), done: false,},
     ]);
 
-    const [currentTask, setCurrentTask] = useState({});
+    const [currentTask, setCurrentTask] = useState('');
+    const [errorText, setErrorText] = useState('');
 
-    const handleInputText = text => {
-        setCurrentTask({text, id: nanoid(),});
+    const handleInputChange = text => {
+        setCurrentTask(text);
     };
 
-    const addTask = currentTask => {
-        setTasks([...tasks, currentTask]);
+    const addTask = (currentTask, e) => {
+        e.preventDefault();
+
+        if (currentTask !== '') {
+            setErrorText('');
+            setTasks([...tasks, {text: currentTask, id: nanoid(), done: false,}]);
+            setCurrentTask('');
+        } else {
+            setErrorText('* Enter a task!');
+        }
     };
 
     const removeTask = id => {
         setTasks(tasks.filter(task => task.id !== id));
-    }
+    };
 
-    const tasksComponents = tasks.map(task => (
-        <Task
-            key={task.id}
-            text={task.text}
-            onRemove={() => removeTask(task.id)}
-        />
-    ));
+    const setDoneTask = id => {
+        setTasks(tasks.map(task => {
+            if (task.id === id) {
+                return {...task, done: !task.done}
+            }
+
+            return task;
+        }));
+    };
 
     return (
         <div className="App">
             <AddTaskForm
-                onInputChange={e => handleInputText(e.target.value)}
-                onAdd={() => addTask(currentTask)}
+                value={currentTask}
+                error={errorText}
+                onInputChange={e => handleInputChange(e.target.value)}
+                onAdd={e => addTask(currentTask, e)}
             />
-            {tasksComponents}
+
+            {tasks.map(task => (
+                <Task
+                    key={task.id}
+                    text={task.text}
+                    done={task.done}
+                    onRemove={() => removeTask(task.id)}
+                    onCheck={() => setDoneTask(task.id)}
+                />
+            ))}
         </div>
     );
 };

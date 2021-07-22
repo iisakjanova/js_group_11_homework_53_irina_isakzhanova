@@ -1,4 +1,4 @@
-.add-task-form {
+#add-task-form {
     margin-bottom: 10px;
     display: flex;
     width: 100%;
@@ -11,4 +11,9 @@
 
 .add-btn {
     margin-left: 10px;
+}
+
+.error-text {
+    color: red;
+    margin-top: 0;
 }
